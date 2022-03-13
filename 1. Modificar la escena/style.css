@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+}
+
+#control {
+  position: absolute;
+  z-index: 9999;
+  left: 15px;
+  top: 15px;
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  color: white;
+}
