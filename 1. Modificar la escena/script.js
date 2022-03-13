@@ -1,15 +1,34 @@
 import * as THREE from "https://cdn.skypack.dev/three";
 
+//Para poder mostrar cualquier cosa con three.js, necesitamos tres cosas: escena, cámara y  renderizador
+
+//Creación Renderizador
 const renderer = new THREE.WebGLRenderer();
+//Tamaño en el que queremos que renderice
+//En este caso, es el de la pantalla que tengamos
 renderer.setSize(window.innerWidth, window.innerHeight);
+//Agregamos el elemento renderizador a nuestro documento HTML
+//De esta manera se creará un nuevo canvas
 document.body.appendChild(renderer.domElement);
 
+//Creación Escena
+//Todos los elementos 3D se tendrán que añadir a la escena que será lo que se pinta en el canvas.
 const scene = new THREE.Scene();
 
 const fov = 75;
 const aspect = window.innerWidth / window.innerHeight;
 const near = 0.1;
 const far = 1000;
+//Creación Cámara 
+/*
+* El primer atributo es el campo de visión. FOV es la extensión (vertical) de la escena que se ve en la pantalla 
+* en un momento dado. 
+* El valor está en grados.
+* El segundo es la relación de aspecto. Casi siempre se usa el ancho del elemento dividido por la altura.
+* Los dos atributos siguientes son el plano de recorte cercano y lejano.
+* Lo que eso significa es que los objetos más alejados de la cámara que el valor 
+* de lejos o más cerca que cerca no se renderizarán.
+*/
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
 const geometry = new THREE.BoxGeometry(1, 1, 1, 10, 10, 10);
