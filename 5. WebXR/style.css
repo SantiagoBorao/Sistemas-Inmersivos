@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+}
+
+#enter-vr-button {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  width: 120px;
+  height: 80px;
+}
