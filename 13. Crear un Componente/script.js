@@ -1,11 +1,14 @@
 /* eslint-disable no-undef*/
 AFRAME.registerComponent("follow", {
   schema: {
+    //id de la entidad
     target: { type: "selector" },
+    //Velocidad a la que seguirá al objeto.
     speed: { type: "number" }
   },
 
   init() {
+    //Vector para calcular dirección y velocidad de una entidad a la otra
     this.directionVec3 = new THREE.Vector3();
     console.log(this.directionVec3);
     //THREE.Object3D
@@ -17,7 +20,8 @@ AFRAME.registerComponent("follow", {
     );
     this.points.push(new THREE.Vector3(targetPos.x, targetPos.y, targetPos.z));
 
-    const material = new THREE.LineBasicMaterial({ color: 0x0000ff });
+    //Creamos una línea entre las dos entidades
+    const material = new THREE.LineBasicMaterial({ color: 0xAA00ff });
     const geom = new THREE.BufferGeometry().setFromPoints(this.points);
 
     this.dir = new THREE.Line(geom, material);
@@ -25,19 +29,32 @@ AFRAME.registerComponent("follow", {
     this.el.sceneEl.object3D.add(this.dir);
   },
 
+  //Tiempo global y tiempo delta del último fotograma en ms
+  //Usamos delta para calcular qué tan lejos debe trasladarse la entidad hacia el objetivo en este fotograma, 
+  //dada la velocidad speed
   tick(time, timeDelta) {
+    //Lógica de seguimiento que se llamará en cada fotograma
+    /*Almacenamos el vector de dirección en this.directionVec3 que 
+    *previamente habías asignado al componente en el controlador init
+    */
     let directionVec3 = this.directionVec3;
     let targetPosition = this.data.target.object3D.position;
     let currentPosition = this.el.object3D.position;
 
+    //Actualizamos la línea por fotograma.
     this.points[0].copy(currentPosition);
+    //Actualizamos la línea cuando la entidad cambie de objetivo.
     this.dir.geometry.setFromPoints(this.points);
     // Subtract the vectors to get the direction the entity should head in.
+    /*Para calcular la dirección en la que debe dirigirse la entidad, restamos el vector de posición 
+    * de la entidad al vector de dirección de la entidad objetivo.
+    */
     directionVec3.copy(targetPosition).sub(currentPosition);
 
-    // Calculate the distance.
+    // Distancia a recorrer
     var distance = directionVec3.length();
 
+    //Para la entidad cuando llegue a su objetivo.
     if (distance < 1) {
       targetPosition.set(
         THREE.MathUtils.randInt(-3, 3),
@@ -55,7 +72,7 @@ AFRAME.registerComponent("follow", {
       directionVec3[axis] *= factor * (timeDelta / 1000);
     });
 
-    // Translate the entity in the direction towards the target.
+    // Actualizamos la posición por fotograma en función de la velocidad.
     this.el.setAttribute("position", {
       x: currentPosition.x + directionVec3.x,
       y: currentPosition.y + directionVec3.y,
