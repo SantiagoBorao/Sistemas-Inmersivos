@@ -16,13 +16,18 @@ AFRAME.registerSystem("xr-image-tracker", {
     this.trackedNodesByImageIdNum = {};
     this.trackedImageList = [];
     this.trackedImagesPreviousFrame = {};
-    this.el.sceneEl.systems.webxr.sessionConfiguration.trackedImages = this.trackedImageList;
+    /*  Es importante observar en la línea 19 del código, que la lista de imágenes se vincula a una 
+    * propiedad trackedImages del sistema webxr. 
+    * Esta propiedad, en el API de WebXR, es un array de objetos que contiene las imágenes. 
+    * Es una propiedad obligatoria. Si no la configuramos tendremos un error al iniciar la sesión.*/
+    this.el.sceneEl.systems.webxr.sessionConfiguration.trackedImages = this.trackedImageList; 
     this.el.sceneEl.addEventListener(
       "register-xr-tracked-image",
       async (ev) => {
         let node = ev.detail.node;
         console.log("register", node);
         let trackedData = node.data;
+        //Añade la imagen a la lista de imágenes de las que se hará el seguimiento en la sesión inmersiva
         let bitmap = await createImageBitmap(trackedData.element);
         let idNum = this.trackedImageList.length;
         this.trackedImageList.push({
@@ -55,6 +60,7 @@ AFRAME.registerSystem("xr-image-tracker", {
       if (!session) return;
       let frame = this.el.sceneEl.frame;
       let imagesTrackedThisFrame = {};
+      //El array contiene objetos con la imagén (bitmap) y una estimación de su tamaño (en metros) en el mundo real.
       let results = frame.getImageTrackingResults();
       for (let i = 0; i < results.length; ++i) {
         let result = results[i];

@@ -16,16 +16,22 @@
         <strong>chrome://flags</strong>.
       </p>
     </div>
+    <!xr-image-tracker que se encargará de hacer el seguimiento de todas las imágenes registradas>
     <a-scene
       xr-image-tracker
       background="color: #ECECEC"
       webxr="requiredFeatures: image-tracking, local-floor; "
     >
+      <!Necesitaremos crear un asset para cada imagen que queremos registrar para hacer su seguimiento>
+      <!Esta imagen se pasará al componente xr-tracked-image para su reconocimiento>
       <a-assets id="assets">
         <img id="hiro" src="hiro.png" />
         <img id="qrcode" src="qrcode.png" />
       </a-assets>
 
+      <!xr-tracked-image para registrar las entidades que contendrán los elementos virtuales a visualizar, asociados a la imagen>
+      <!En la entidad asociada a cada componente xr-tracked-image podemos definir los componentes 3D 
+      de la escena que se visualizarán al reconocer la imagen.>
       <a-entity xr-tracked-image="element: #hiro; widthInMeters: 0.08">
         <a-box
           position="0 0.03 0"
