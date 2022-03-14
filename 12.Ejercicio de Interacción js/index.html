@@ -14,6 +14,9 @@
         visible="true"
       ></a-box>
       <a-camera position="0 0 0">
+        <!Para mejorar las prestaciones es útil definir qué entidades queremos controlar.>
+        <!Esto se hace a través del componente raycaster, 
+        definiendo la clase de objetos a controlar, y asignando esa clase a las entidades>
         <a-cursor raycaster="objects: .selectable"></a-cursor>
       </a-camera>
     </body>
