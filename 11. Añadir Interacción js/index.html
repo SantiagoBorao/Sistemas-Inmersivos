@@ -17,7 +17,13 @@
       ></a-box>
 
       <a-box position="-3 0 0" rotation="0 0 0" color="#ff00ff"> </a-box>
+      <!Para añadir interacción basada en la mirada, necesitamos agregar o implementar un componente>
       <a-camera>
+        <!La entidad primitiva a-cursor de A-Frame proporciona interacción basada en la mirada
+         si está conectada a la cámara, el componente a-camera.>
+
+        <!El componente del cursor escucha los eventos y mantiene el estado de lo que se está moviendo y presionando
+         para proporcionar eventos de mousedown, mouseup, mouseenter, mouseleave y click>
         <a-cursor></a-cursor>
       </a-camera>
     </a-scene>
