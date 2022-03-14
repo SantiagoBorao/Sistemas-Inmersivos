@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <img
+          id="earth"
+          src="https://raw.githubusercontent.com/aframevr/sample-assets/master/assets/images/space/earth_atmos_4096.jpg"
+        />
+        <a-asset-item id="bulbasaur" src="bulbasaur.gltf"></a-asset-item>
+        <a-asset-item
+          id="trex"
+          src="https://raw.githubusercontent.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+        ></a-asset-item>
+      </a-assets>
+      <a-box position="-1 0.5 -3" rotation="0 0 0" color="#4CC3D9">
+        <a-sphere position="0 1.5 0" radius="1" src="#earth"></a-sphere>
+      </a-box>
+      <a-gltf-model
+        src="#bulbasaur"
+        position="1 0 -3"
+        scale="0.5 0.5 0.5"
+        rotation="-35 -90 0"
+      ></a-gltf-model>
+
+      <a-gltf-model
+        src="#trex"
+        position="1 1.6 -4"
+        scale="0.1 0.1 0.1"
+        rotation="0 -75 0"
+      ></a-gltf-model>
+    </a-scene>
+  </body>
+</html>
