@@ -4,20 +4,27 @@
   </head>
   <body>
     <a-scene>
+      <!Por temas de rendimiento es recomendable crear un asset, meterle una textura y luego añadirlo a la escena>
+      <!Crear a-assets, definimos una textura con img, asignamos un id, podemos hacer ref a eso con '#'>
       <a-assets>
+        <!Aplicamos una textura con src. Habrá que eliminar la propiedad color>
         <img
           id="earth"
           src="https://raw.githubusercontent.com/aframevr/sample-assets/master/assets/images/space/earth_atmos_4096.jpg"
         />
+        <!Uso de modelos 3D con gltf model>
+        <!Para modelos 3D usamos a-asset-item>
         <a-asset-item id="bulbasaur" src="bulbasaur.gltf"></a-asset-item>
         <a-asset-item
           id="trex"
           src="https://raw.githubusercontent.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
         ></a-asset-item>
       </a-assets>
+      <!Podemos aplicar una textura a un objeto
       <a-box position="-1 0.5 -3" rotation="0 0 0" color="#4CC3D9">
         <a-sphere position="0 1.5 0" radius="1" src="#earth"></a-sphere>
       </a-box>
+      <!O crear un modelo 3D>
       <a-gltf-model
         src="#bulbasaur"
         position="1 0 -3"
