@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <a-scene whack>
+      <a-box
+        class="selectable"
+        id="to-whack"
+        color="red"
+        material="transparent: true; opacity: 1.0"
+        position="0 1.6 -5"
+        visible="true"
+      ></a-box>
+      <a-camera position="0 0 0">
+        <a-cursor raycaster="objects: .selectable"></a-cursor>
+      </a-camera>
+    </body>
+    </a-scene>
+   
+</html>
